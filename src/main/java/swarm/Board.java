@@ -4,14 +4,19 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JPanel;
+
+import swarm.ai.FleeFromNear;
 
 public class Board extends JPanel implements Runnable {
 
 	private static final long DELAY = 17; // 17ms ~ 60 FPS
+	private static final long DOTS = 200;
 
-	private static Dot[] dots = new Dot[200];
+	private static List<Dot> dots = new ArrayList<Dot>();
 
 	public Board() {
 		setPreferredSize(new Dimension(1280, 720));
@@ -59,11 +64,15 @@ public class Board extends JPanel implements Runnable {
 	public void addNotify() {
 		super.addNotify();
 
-		for (int i = 0; i < dots.length; i++) {
-			dots[i] = new Dot(this, new MoveTo(1, 1));
+		for (int i = 0; i < DOTS; i++) {
+			dots.add(new Dot(this, new FleeFromNear()));
 		}
 
 		new Thread(this).start();
+	}
+
+	public List<Dot> getDots() {
+		return dots;
 	}
 
 }

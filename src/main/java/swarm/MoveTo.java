@@ -11,8 +11,8 @@ public class MoveTo extends AI {
 
 	private final Vector2D destination;
 
-	public MoveTo(final double x, final double y) {
-		destination = new Vector2D(x, y);
+	public MoveTo(final Vector2D destination) {
+		this.destination = destination;
 	}
 
 	@Override
@@ -29,6 +29,23 @@ public class MoveTo extends AI {
 		final Vector2D v = destination.subtract(dot.getPosition()).normalize().multiply(SPEED / 60);
 
 		dot.setPosition(dot.getPosition().add(v));
+		if (dot.getPosition().getX() < 0) {
+			dot.getPosition().setX(0);
+		} else if (dot.getPosition().getX() > d.getWidth()) {
+			dot.getPosition().setX(d.getWidth());
+		}
+
+		if (dot.getPosition().getY() < 0) {
+			dot.getPosition().setY(0);
+		} else if (dot.getPosition().getY() > d.getHeight()) {
+			dot.getPosition().setY(d.getHeight());
+		}
+
+		final double distanceSquared = destination.subtract(dot.getPosition()).lengthSquared();
+
+		if (distanceSquared < SPEED / 60) {
+			succeed();
+		}
 	}
 
 }

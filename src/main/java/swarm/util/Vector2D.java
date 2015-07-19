@@ -58,4 +58,12 @@ public class Vector2D {
 		return divide(length());
 	}
 
+	public double distanceSquared(final Vector2D v) {
+		return v.subtract(this).lengthSquared();
+	}
+
+	public double distance(final Vector2D v) {
+		return distanceSquared(v);
+	}
+
 }

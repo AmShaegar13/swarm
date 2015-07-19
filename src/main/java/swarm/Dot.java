@@ -51,4 +51,22 @@ public class Dot {
 		return new Ellipse2D.Double(position.getX(), position.getY(), 2 * r, 2 * r);
 	}
 
+	public Dot nearDot() {
+		Dot near = this;
+		double distanceSquared = Double.MAX_VALUE;
+		for (final Dot dot : board.getDots()) {
+			if (dot == this) {
+				continue;
+			}
+			final double distanceCurrent = dot.getPosition().distanceSquared(getPosition());
+
+			if (distanceCurrent < distanceSquared) {
+				distanceSquared = distanceCurrent;
+				near = dot;
+			}
+		}
+
+		return near;
+	}
+
 }
