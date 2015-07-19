@@ -32,8 +32,7 @@ public class Board extends JPanel implements Runnable {
 	}
 
 	private void drawDot(final Graphics2D g, Dot dot) {
-		Ellipse2D e = new Ellipse2D.Double(dot.getX(), dot.getY(), 2*dot.getR(), 2*dot.getR());
-		g.draw(e);
+		g.draw(new Ellipse2D.Double(dot.getX(), dot.getY(), 2*dot.getR(), 2*dot.getR()));
 	}
 
 	public void run() {
@@ -41,7 +40,7 @@ public class Board extends JPanel implements Runnable {
 			long startTime = System.currentTimeMillis();
 			
 			for(Dot dot : dots) {
-				dot.move(getSize());
+				dot.tick();
 			}
 			repaint();
 			
@@ -58,7 +57,7 @@ public class Board extends JPanel implements Runnable {
 		super.addNotify();
 
 		for(int i = 0; i < dots.length; i++) {
-			dots[i] = new Dot(getPreferredSize());
+			dots[i] = new Dot(this);
 		}
 		
 		new Thread(this).start();
