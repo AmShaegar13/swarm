@@ -13,17 +13,20 @@ public class Swarm extends JFrame {
 	private void initGUI() {
 		add(new Board());
 		
-		setSize(500, 500);
 		setTitle("Swarm");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
+        
+        pack();
         setLocationRelativeTo(null);
+        
+		setVisible(true);
 	}
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				Swarm app = new Swarm();
-				app.setVisible(true);
+				new Swarm();
 			}
 		});
 	}

@@ -11,6 +11,10 @@ import javax.swing.JPanel;
 public class Board extends JPanel implements Runnable {
 	private static Dot[] dots = new Dot[200];
 	
+	public Board() {
+		setPreferredSize(new Dimension(1280, 720));
+	}
+	
 	@Override
 	protected void paintComponent(final Graphics g) {
 		super.paintComponent(g);
@@ -54,7 +58,7 @@ public class Board extends JPanel implements Runnable {
 		super.addNotify();
 
 		for(int i = 0; i < dots.length; i++) {
-			dots[i] = new Dot(new Dimension(450, 430));
+			dots[i] = new Dot(getPreferredSize());
 		}
 		
 		new Thread(this).start();

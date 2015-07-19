@@ -19,8 +19,8 @@ public class Dot {
 
 	public Dot(Dimension d) {
 		r = 10;
-		x = Math.random() * d.getWidth();
-		y = Math.random() * d.getHeight();
+		x = Math.random() * (d.getWidth() - 2 * r);
+		y = Math.random() * (d.getHeight() - 2 * r);
 		vx = Math.random() * 10 - 5;
 		vy = Math.random() * 10 - 5;
 	}
