@@ -9,7 +9,7 @@ import java.awt.geom.Ellipse2D;
 import javax.swing.JPanel;
 
 public class Board extends JPanel implements Runnable {
-	private static double r = -1, x, y, vx, vy;
+	private static Dot dot;
 	
 	@Override
 	protected void paintComponent(final Graphics g) {
@@ -22,36 +22,17 @@ public class Board extends JPanel implements Runnable {
 
 		g2d.setRenderingHints(rh);
 		
-		drawDot(g2d);
+		drawDot(g2d, dot);
 	}
 
-	private void moveDot() {
-		Dimension d = getSize();
-		d.setSize(d.getWidth() - 2 * r, d.getHeight() - 2 * r);
-		
-		x = x + vx;
-		y = y + vy;
-
-		double dx = Math.min(d.getWidth() - x, x);
-		double dy = Math.min(d.getHeight() - y, y);
-
-		if(dx < 0) {
-			vx = -vx;
-		}
-
-		if(dy < 0) {
-			vy = -vy;
-		}
-	}
-
-	private void drawDot(final Graphics2D g) {
-		Ellipse2D e = new Ellipse2D.Double(x, y, 2*r, 2*r);
+	private void drawDot(final Graphics2D g, Dot dot) {
+		Ellipse2D e = new Ellipse2D.Double(dot.getX(), dot.getY(), 2*dot.getR(), 2*dot.getR());
 		g.draw(e);
 	}
 
 	public void run() {
 		while(true) {
-			moveDot();
+			dot.move(getSize());
 			repaint();
 			
 			try {
@@ -66,13 +47,7 @@ public class Board extends JPanel implements Runnable {
 	public void addNotify() {
 		super.addNotify();
 		
-		Dimension d = new Dimension(200, 200);
-
-		r = Math.random() * Math.min(d.getWidth(), d.getHeight()) / 4;
-		x = Math.random() * d.getWidth();
-		y = Math.random() * d.getHeight();
-		vx = Math.random() * 10 - 5;
-		vy = Math.random() * 10 - 5;
+		dot = new Dot(new Dimension(200, 200));
 		
 		new Thread(this).start();
 	}
