@@ -1,58 +1,54 @@
 package swarm;
 
 import java.awt.Dimension;
+import java.awt.Shape;
+import java.awt.geom.Ellipse2D;
 
 import swarm.ai.AI;
+import swarm.util.Vector2D;
 
 public class Dot {
-	private double r, x, y, vx, vy;
-	private Board board;
-	private AI ai;
-	
+
+	private double r;
+	private Vector2D position;
+	private final Board board;
+	private final AI ai;
+
+	public Dot(final Board board, final AI ai) {
+		this.board = board;
+		this.ai = ai;
+
+		final Dimension d = board.getPreferredSize();
+
+		r = 10;
+		position = new Vector2D(Math.random() * (d.getWidth() - 2 * r), Math.random() * (d.getHeight() - 2 * r));
+	}
+
 	public double getR() {
 		return r;
 	}
 
-	public double getX() {
-		return x;
+	public void setR(final double r) {
+		this.r = r;
 	}
 
-	public double getY() {
-		return y;
+	public Vector2D getPosition() {
+		return position;
 	}
 
-	public Dot(Board board) {
-		this.board = board;
-		
-		Dimension d = board.getPreferredSize();
-		
-		r = 10;
-		x = Math.random() * (d.getWidth() - 2 * r);
-		y = Math.random() * (d.getHeight() - 2 * r);
-		vx = Math.random() * 10 - 5;
-		vy = Math.random() * 10 - 5;
+	public void setPosition(final Vector2D position) {
+		this.position = position;
 	}
-	
+
 	public void tick() {
-		move();
+		if (ai.getState() == null) {
+			ai.start();
+		}
+		ai.tick(this, board);
 	}
 
-	public void move() {
-		Dimension d = board.getPreferredSize();
-		d.setSize(d.getWidth() - 2 * r, d.getHeight() - 2 * r);
-		
-		x = x + vx;
-		y = y + vy;
-
-		double dx = Math.min(d.getWidth() - x, x);
-		double dy = Math.min(d.getHeight() - y, y);
-
-		if(dx < 0) {
-			vx = -vx;
-		}
-
-		if(dy < 0) {
-			vy = -vy;
-		}
+	public Shape draw() {
+		return new Ellipse2D.Double(position.getX(), position.getY(), 2 * r, 2 * r);
 	}
+
 }
