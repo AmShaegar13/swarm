@@ -13,7 +13,7 @@ public class Swarm extends JFrame {
 	private void initGUI() {
 		add(new Board());
 		
-		setSize(250, 200);
+		setSize(500, 500);
 		setTitle("Swarm");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

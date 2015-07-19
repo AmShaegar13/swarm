@@ -9,7 +9,7 @@ import java.awt.geom.Ellipse2D;
 import javax.swing.JPanel;
 
 public class Board extends JPanel implements Runnable {
-	private static Dot dot;
+	private static Dot[] dots = new Dot[200];
 	
 	@Override
 	protected void paintComponent(final Graphics g) {
@@ -22,7 +22,9 @@ public class Board extends JPanel implements Runnable {
 
 		g2d.setRenderingHints(rh);
 		
-		drawDot(g2d, dot);
+		for(Dot dot : dots) {
+			drawDot(g2d, dot);
+		}
 	}
 
 	private void drawDot(final Graphics2D g, Dot dot) {
@@ -32,11 +34,15 @@ public class Board extends JPanel implements Runnable {
 
 	public void run() {
 		while(true) {
-			dot.move(getSize());
+			long startTime = System.currentTimeMillis();
+			
+			for(Dot dot : dots) {
+				dot.move(getSize());
+			}
 			repaint();
 			
 			try {
-				Thread.sleep(20);
+				Thread.sleep(17 - System.currentTimeMillis() + startTime);
 			} catch (InterruptedException e) {
                 System.out.println("Interrupted: " + e.getMessage());
 			}
@@ -46,8 +52,10 @@ public class Board extends JPanel implements Runnable {
 	@Override
 	public void addNotify() {
 		super.addNotify();
-		
-		dot = new Dot(new Dimension(200, 200));
+
+		for(int i = 0; i < dots.length; i++) {
+			dots[i] = new Dot(new Dimension(450, 430));
+		}
 		
 		new Thread(this).start();
 	}
