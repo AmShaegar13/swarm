@@ -9,14 +9,16 @@ import de.amshaegar.swarm.util.Vector2D;
 
 public class Dot {
 
-	private double r;
-	private Vector2D position;
+    private final double r;
+    private Vector2D position;
 	private final Board board;
 	private final AI ai;
+    private final Faction faction;
 
-	public Dot(final Board board, final AI ai) {
+	public Dot(final Board board, final AI ai, final Faction faction) {
 		this.board = board;
 		this.ai = ai;
+        this.faction = faction;
 
 		final Dimension d = board.getPreferredSize();
 
@@ -28,10 +30,6 @@ public class Dot {
 		return r;
 	}
 
-	public void setR(final double r) {
-		this.r = r;
-	}
-
 	public Vector2D getPosition() {
 		return position;
 	}
@@ -39,6 +37,10 @@ public class Dot {
 	public void setPosition(final Vector2D position) {
 		this.position = position;
 	}
+
+    public Faction getFaction() {
+        return faction;
+    }
 
 	public void tick() {
 		if (ai.getState() == null) {
@@ -68,5 +70,4 @@ public class Dot {
 
 		return near;
 	}
-
 }

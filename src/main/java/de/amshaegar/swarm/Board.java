@@ -21,7 +21,7 @@ public class Board extends JPanel {
 		setPreferredSize(new Dimension(1280, 720));
 
         for (int i = 0; i < DOTS; i++) {
-            dots.add(new Dot(this, new FleeFromNear()));
+            dots.add(new Dot(this, new FleeFromNear(), Faction.values()[(int) (Math.random()*Faction.values().length)]));
         }
 	}
 
@@ -38,7 +38,8 @@ public class Board extends JPanel {
 		g2d.setRenderingHints(rh);
 
 		for (final Dot dot : dots) {
-			g2d.draw(dot.draw());
+            g2d.setColor(dot.getFaction().getColor());
+			g2d.fill(dot.draw());
 		}
 	}
 
