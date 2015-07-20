@@ -22,7 +22,7 @@ public class DotsContainer {
 	}
 
 	public List<Dot> get(final Faction faction) {
-		return dotsByFaction.get(faction);
+		return new LinkedList<Dot>(dotsByFaction.get(faction));
 	}
 
 	public void add(final Dot dot, final Faction faction) {
