@@ -3,26 +3,24 @@ package de.amshaegar.swarm;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.RenderingHints;
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.Toolkit;
 
 import javax.swing.JPanel;
 
-import de.amshaegar.swarm.ai.FleeFromNear;
-
 public class Board extends JPanel {
 
-	private static final long DOTS = 200;
-
-	private static List<Dot> dots = new ArrayList<Dot>();
+	private final DotsContainer dots;
 
 	public Board() {
 		setPreferredSize(new Dimension(1280, 720));
 
-        for (int i = 0; i < DOTS; i++) {
-            dots.add(new Dot(this, new FleeFromNear(), Faction.values()[(int) (Math.random()*Faction.values().length)]));
-        }
+		dots = new DotsContainer();
+	}
+
+	public DotsContainer getDots() {
+		return dots;
 	}
 
 	@Override
@@ -37,22 +35,20 @@ public class Board extends JPanel {
 
 		g2d.setRenderingHints(rh);
 
-		for (final Dot dot : dots) {
-            g2d.setColor(dot.getFaction().getColor());
-			g2d.fill(dot.draw());
+		final Image castle = Toolkit.getDefaultToolkit().getImage("castle.png");
+		g2d.drawImage(castle, 50, 50, this);
+
+		for (final Dot dot : dots.getAll()) {
+			dot.paint(g2d);
 		}
 	}
 
-    public void tick() {
-        for (final Dot dot : dots) {
-            dot.tick();
-        }
+	public void tick() {
+		for (final Dot dot : dots.getAll()) {
+			dot.tick();
+		}
 
-        repaint();
-    }
-
-	public List<Dot> getDots() {
-		return dots;
+		repaint();
 	}
 
 }
