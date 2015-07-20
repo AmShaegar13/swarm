@@ -2,7 +2,6 @@ package swarm.ai;
 
 import swarm.Board;
 import swarm.Dot;
-import swarm.MoveTo;
 import swarm.util.Vector2D;
 
 public class FleeFromNear extends AI {

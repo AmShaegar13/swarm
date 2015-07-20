@@ -11,15 +11,18 @@ import javax.swing.JPanel;
 
 import swarm.ai.FleeFromNear;
 
-public class Board extends JPanel implements Runnable {
+public class Board extends JPanel {
 
-	private static final long DELAY = 17; // 17ms ~ 60 FPS
 	private static final long DOTS = 200;
 
 	private static List<Dot> dots = new ArrayList<Dot>();
 
 	public Board() {
 		setPreferredSize(new Dimension(1280, 720));
+
+        for (int i = 0; i < DOTS; i++) {
+            dots.add(new Dot(this, new FleeFromNear()));
+        }
 	}
 
 	@Override
@@ -39,37 +42,13 @@ public class Board extends JPanel implements Runnable {
 		}
 	}
 
-	public void run() {
-		while (true) {
-			final long startTime = System.currentTimeMillis();
+    public void tick() {
+        for (final Dot dot : dots) {
+            dot.tick();
+        }
 
-			for (final Dot dot : dots) {
-				dot.tick();
-			}
-			repaint();
-
-			try {
-				long sleep = DELAY - System.currentTimeMillis() + startTime;
-				if (sleep < 0) {
-					sleep = 2;
-				}
-				Thread.sleep(sleep);
-			} catch (final InterruptedException e) {
-				System.out.println("Interrupted: " + e.getMessage());
-			}
-		}
-	}
-
-	@Override
-	public void addNotify() {
-		super.addNotify();
-
-		for (int i = 0; i < DOTS; i++) {
-			dots.add(new Dot(this, new FleeFromNear()));
-		}
-
-		new Thread(this).start();
-	}
+        repaint();
+    }
 
 	public List<Dot> getDots() {
 		return dots;

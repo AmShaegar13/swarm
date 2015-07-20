@@ -1,8 +1,9 @@
-package swarm;
+package swarm.ai;
 
 import java.awt.Dimension;
 
-import swarm.ai.AI;
+import swarm.Board;
+import swarm.Dot;
 import swarm.util.Vector2D;
 
 public class MoveTo extends AI {
