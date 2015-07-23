@@ -8,12 +8,18 @@ import java.awt.Toolkit;
 
 import javax.swing.JPanel;
 
+import de.amshaegar.swarm.util.Vector2D;
+
 public class Board extends JPanel {
 
 	private final DotsContainer dots;
 
 	public Board() {
 		dots = new DotsContainer();
+
+		for (final Faction faction : Faction.values()) {
+			faction.setLocation(new Vector2D(Math.random() * 1230 + 50, Math.random() * 670 + 50));
+		}
 	}
 
 	public DotsContainer getDots() {
@@ -33,7 +39,11 @@ public class Board extends JPanel {
 		g2d.setRenderingHints(rh);
 
 		final Image castle = Toolkit.getDefaultToolkit().getImage("castle.png");
-		g2d.drawImage(castle, 50, 50, this);
+
+		for (final Faction faction : Faction.values()) {
+			g2d.drawImage(castle, (int) Math.round(faction.getLocation().getX()),
+					(int) Math.round(faction.getLocation().getY()), this);
+		}
 
 		for (final Dot dot : dots.getAll()) {
 			dot.paint(g2d);
