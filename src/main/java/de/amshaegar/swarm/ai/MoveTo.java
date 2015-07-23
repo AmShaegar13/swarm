@@ -29,7 +29,7 @@ public class MoveTo extends AI {
 
 		final Vector2D v = destination.subtract(dot.getPosition()).normalize().multiply(SPEED / 60);
 
-		dot.setPosition(dot.getPosition().add(v));
+		dot.setLocation(dot.getPosition().add(v));
 		if (dot.getPosition().getX() < 0) {
 			dot.getPosition().setX(0);
 		} else if (dot.getPosition().getX() > d.getWidth()) {

@@ -35,7 +35,7 @@ public class Dot {
 		return position;
 	}
 
-	public void setPosition(final Vector2D position) {
+	public void setLocation(final Vector2D position) {
 		this.position = position;
 	}
 
