@@ -1,7 +1,6 @@
 package de.amshaegar.swarm.ai;
 
 import de.amshaegar.swarm.Board;
-import de.amshaegar.swarm.Dot;
 
 public abstract class AI {
 
@@ -15,7 +14,7 @@ public abstract class AI {
 		this.state = State.Active;
 	}
 
-	public abstract void tick(Dot dot, Board board);
+	public abstract void tick(Object o, Board board);
 
 	protected void succeed() {
 		this.state = State.Success;

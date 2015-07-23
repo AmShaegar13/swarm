@@ -27,6 +27,9 @@ public class Vector2D extends Point2D.Double {
 	}
 
 	public Vector2D divide(final double m) {
+		if (m == 0) {
+			return new Vector2D(0, 0);
+		}
 		return new Vector2D(x / m, y / m);
 	}
 

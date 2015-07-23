@@ -9,7 +9,7 @@ import de.amshaegar.swarm.util.Vector2D;
 
 public class MoveTo extends AI {
 
-	private static final double SPEED = 100; // in pixel per ~ 1 second
+	private static final double SPEED = 100 / 60; // in pixel per frame
 
 	private final Vector2D destination;
 
@@ -18,17 +18,18 @@ public class MoveTo extends AI {
 	}
 
 	@Override
-	public void tick(final Dot dot, final Board board) {
+	public void tick(final Object o, final Board board) {
+		final Dot dot = (Dot) o;
 		if (isActive()) {
 			move(dot, board);
 		}
 	}
 
 	public void move(final Dot dot, final Board board) {
-		final Dimension d = board.getPreferredSize();
+		final Dimension d = board.getSize();
 		d.setSize(d.getWidth() - 2 * dot.getR(), d.getHeight() - 2 * dot.getR());
 
-		final Vector2D v = destination.subtract(dot.getLocation()).normalize().multiply(SPEED / 60);
+		final Vector2D v = destination.subtract(dot.getLocation()).normalize().multiply(SPEED);
 		final Vector2D newLocation = dot.getLocation().add(v);
 		double x = newLocation.getX();
 		double y = newLocation.getY();
@@ -46,9 +47,9 @@ public class MoveTo extends AI {
 		}
 
 		newLocation.setLocation(x, y);
-		final double distanceSquared = destination.subtract(newLocation).lengthSq();
+		dot.setLocation(newLocation);
 
-		if (distanceSquared < SPEED / 60) {
+		if (destination.distanceSq(newLocation) < SPEED) {
 			succeed();
 		}
 	}

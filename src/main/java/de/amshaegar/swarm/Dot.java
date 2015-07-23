@@ -1,7 +1,6 @@
 package de.amshaegar.swarm;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 
@@ -10,7 +9,7 @@ import de.amshaegar.swarm.util.Vector2D;
 
 public class Dot {
 
-	private final double r;
+	private final double r = 10;
 	private Vector2D location;
 	private final Board board;
 	private final AI ai;
@@ -20,11 +19,7 @@ public class Dot {
 		this.board = board;
 		this.ai = ai;
 		this.faction = faction;
-
-		final Dimension d = board.getPreferredSize();
-
-		r = 10;
-		location = new Vector2D(Math.random() * (d.getWidth() - 2 * r), Math.random() * (d.getHeight() - 2 * r));
+		this.location = faction.getLocation();
 	}
 
 	public double getR() {

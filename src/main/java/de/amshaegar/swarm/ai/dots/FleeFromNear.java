@@ -10,10 +10,25 @@ public class FleeFromNear extends AI {
 	private MoveTo moveTo;
 
 	@Override
-	public void tick(final Dot dot, final Board board) {
-		moveTo = new MoveTo(fleeToPosition(dot));
-		moveTo.start();
-		moveTo.tick(dot, board);
+	public void tick(final Object o, final Board board) {
+		final Dot dot = (Dot) o;
+		if (isActive()) {
+			moveTo = new MoveTo(fleeToPosition(dot));
+			moveTo.start();
+			moveTo.tick(dot, board);
+
+			switch (moveTo.getState()) {
+			case Success:
+				succeed();
+				break;
+			case Failure:
+				fail();
+				break;
+
+			default:
+				break;
+			}
+		}
 	}
 
 	private Vector2D fleeToPosition(final Dot dot) {

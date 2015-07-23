@@ -51,6 +51,9 @@ public class Board extends JPanel {
 	}
 
 	public void tick() {
+		for (final Faction faction : Faction.values()) {
+			faction.tick(this);
+		}
 		for (final Dot dot : dots.getAll()) {
 			dot.tick();
 		}
