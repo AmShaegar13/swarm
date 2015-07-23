@@ -18,7 +18,7 @@ public class Board extends JPanel {
 		dots = new DotsContainer();
 
 		for (final Faction faction : Faction.values()) {
-			faction.setLocation(new Vector2D(Math.random() * 1230 + 50, Math.random() * 670 + 50));
+			faction.setLocation(new Vector2D(Math.random() * 1180 + 50, Math.random() * 620 + 50));
 		}
 	}
 
