@@ -27,22 +27,25 @@ public class MoveTo extends AI {
 		final Dimension d = board.getPreferredSize();
 		d.setSize(d.getWidth() - 2 * dot.getR(), d.getHeight() - 2 * dot.getR());
 
-		final Vector2D v = destination.subtract(dot.getPosition()).normalize().multiply(SPEED / 60);
+		final Vector2D v = destination.subtract(dot.getLocation()).normalize().multiply(SPEED / 60);
+		final Vector2D newLocation = dot.getLocation().add(v);
+		double x = newLocation.getX();
+		double y = newLocation.getY();
 
-		dot.setLocation(dot.getPosition().add(v));
-		if (dot.getPosition().getX() < 0) {
-			dot.getPosition().setX(0);
-		} else if (dot.getPosition().getX() > d.getWidth()) {
-			dot.getPosition().setX(d.getWidth());
+		if (x < 0) {
+			x = 0;
+		} else if (x > d.getWidth()) {
+			x = d.getWidth();
 		}
 
-		if (dot.getPosition().getY() < 0) {
-			dot.getPosition().setY(0);
-		} else if (dot.getPosition().getY() > d.getHeight()) {
-			dot.getPosition().setY(d.getHeight());
+		if (y < 0) {
+			y = 0;
+		} else if (y > d.getHeight()) {
+			y = d.getHeight();
 		}
 
-		final double distanceSquared = destination.subtract(dot.getPosition()).lengthSquared();
+		newLocation.setLocation(x, y);
+		final double distanceSquared = destination.subtract(newLocation).lengthSq();
 
 		if (distanceSquared < SPEED / 60) {
 			succeed();

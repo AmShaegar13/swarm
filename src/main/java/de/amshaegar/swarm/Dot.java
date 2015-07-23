@@ -11,7 +11,7 @@ import de.amshaegar.swarm.util.Vector2D;
 public class Dot {
 
 	private final double r;
-	private Vector2D position;
+	private Vector2D location;
 	private final Board board;
 	private final AI ai;
 	private final Faction faction;
@@ -24,19 +24,19 @@ public class Dot {
 		final Dimension d = board.getPreferredSize();
 
 		r = 10;
-		position = new Vector2D(Math.random() * (d.getWidth() - 2 * r), Math.random() * (d.getHeight() - 2 * r));
+		location = new Vector2D(Math.random() * (d.getWidth() - 2 * r), Math.random() * (d.getHeight() - 2 * r));
 	}
 
 	public double getR() {
 		return r;
 	}
 
-	public Vector2D getPosition() {
-		return position;
+	public Vector2D getLocation() {
+		return location;
 	}
 
-	public void setLocation(final Vector2D position) {
-		this.position = position;
+	public void setLocation(final Vector2D location) {
+		this.location = location;
 	}
 
 	public Faction getFaction() {
@@ -51,7 +51,7 @@ public class Dot {
 	}
 
 	public void paint(final Graphics2D g2d) {
-		final Ellipse2D e = new Ellipse2D.Double(position.getX(), position.getY(), 2 * r, 2 * r);
+		final Ellipse2D e = new Ellipse2D.Double(location.getX(), location.getY(), 2 * r, 2 * r);
 		g2d.setColor(faction.getColor());
 		g2d.fill(e);
 		g2d.setColor(Color.black);
@@ -65,7 +65,7 @@ public class Dot {
 			if (dot == this) {
 				continue;
 			}
-			final double distanceCurrent = dot.getPosition().distanceSquared(getPosition());
+			final double distanceCurrent = dot.getLocation().distanceSq(getLocation());
 
 			if (distanceCurrent < distanceSquared) {
 				distanceSquared = distanceCurrent;

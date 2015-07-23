@@ -16,7 +16,7 @@ public class FleeFromNear extends AI {
 	}
 
 	private Vector2D fleeToPosition(final Dot dot) {
-		return dot.getPosition().multiply(2).subtract(dot.nearDot().getPosition());
+		return dot.getLocation().multiply(2).subtract(dot.nearDot().getLocation());
 	}
 
 }

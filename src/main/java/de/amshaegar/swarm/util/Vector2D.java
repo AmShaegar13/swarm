@@ -30,24 +30,16 @@ public class Vector2D extends Point2D.Double {
 		return new Vector2D(x / m, y / m);
 	}
 
-	public double lengthSquared() {
+	public double lengthSq() {
 		return Math.pow(x, 2) + Math.pow(y, 2);
 	}
 
 	public double length() {
-		return Math.sqrt(lengthSquared());
+		return Math.sqrt(lengthSq());
 	}
 
 	public Vector2D normalize() {
 		return divide(length());
-	}
-
-	public double distanceSquared(final Vector2D v) {
-		return v.subtract(this).lengthSquared();
-	}
-
-	public double distance(final Vector2D v) {
-		return distanceSquared(v);
 	}
 
 }
