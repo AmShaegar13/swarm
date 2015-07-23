@@ -1,6 +1,5 @@
 package de.amshaegar.swarm;
 
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -14,8 +13,6 @@ public class Board extends JPanel {
 	private final DotsContainer dots;
 
 	public Board() {
-		setPreferredSize(new Dimension(1280, 720));
-
 		dots = new DotsContainer();
 	}
 
