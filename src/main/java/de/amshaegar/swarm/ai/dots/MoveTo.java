@@ -1,9 +1,10 @@
-package de.amshaegar.swarm.ai;
+package de.amshaegar.swarm.ai.dots;
 
 import java.awt.Dimension;
 
 import de.amshaegar.swarm.Board;
 import de.amshaegar.swarm.Dot;
+import de.amshaegar.swarm.ai.AI;
 import de.amshaegar.swarm.util.Vector2D;
 
 public class MoveTo extends AI {
