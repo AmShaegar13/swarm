@@ -27,21 +27,21 @@ public class MoveTo extends AI {
 
 	public void move(final Dot dot, final Board board) {
 		final Dimension d = board.getSize();
-		d.setSize(d.getWidth() - 2 * dot.getR(), d.getHeight() - 2 * dot.getR());
+		d.setSize(d.getWidth() - dot.getR(), d.getHeight() - dot.getR());
 
 		final Vector2D v = destination.subtract(dot.getLocation()).normalize().multiply(SPEED);
 		final Vector2D newLocation = dot.getLocation().add(v);
 		double x = newLocation.getX();
 		double y = newLocation.getY();
 
-		if (x < 0) {
-			x = 0;
+		if (x < dot.getR()) {
+			x = dot.getR();
 		} else if (x > d.getWidth()) {
 			x = d.getWidth();
 		}
 
-		if (y < 0) {
-			y = 0;
+		if (y < dot.getR()) {
+			y = dot.getR();
 		} else if (y > d.getHeight()) {
 			y = d.getHeight();
 		}

@@ -46,7 +46,7 @@ public class Dot {
 	}
 
 	public void paint(final Graphics2D g2d) {
-		final Ellipse2D e = new Ellipse2D.Double(location.getX(), location.getY(), 2 * r, 2 * r);
+		final Ellipse2D e = new Ellipse2D.Double(location.getX() - r, location.getY() - r, 2 * r, 2 * r);
 		g2d.setColor(faction.getColor());
 		g2d.fill(e);
 		g2d.setColor(Color.black);

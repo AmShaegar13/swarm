@@ -2,9 +2,7 @@ package de.amshaegar.swarm;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.RenderingHints;
-import java.awt.Toolkit;
 
 import javax.swing.JPanel;
 
@@ -38,11 +36,8 @@ public class Board extends JPanel {
 
 		g2d.setRenderingHints(rh);
 
-		final Image castle = Toolkit.getDefaultToolkit().getImage("castle.png");
-
 		for (final Faction faction : Faction.values()) {
-			g2d.drawImage(castle, (int) Math.round(faction.getLocation().getX()),
-					(int) Math.round(faction.getLocation().getY()), this);
+			faction.paint(g2d);
 		}
 
 		for (final Dot dot : dots.getAll()) {

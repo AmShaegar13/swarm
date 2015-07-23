@@ -1,6 +1,9 @@
 package de.amshaegar.swarm;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 import de.amshaegar.swarm.ai.AI;
 import de.amshaegar.swarm.ai.Repeat;
@@ -37,6 +40,13 @@ public enum Faction {
 
 	public void tick(final Board board) {
 		ai.tick(this, board);
+	}
+
+	public void paint(final Graphics2D g2d) {
+		final Image castle = Toolkit.getDefaultToolkit().getImage("castle.png");
+
+		g2d.drawImage(castle, (int) Math.round(getLocation().getX() - castle.getWidth(null) / 2),
+				(int) Math.round(getLocation().getY() - castle.getHeight(null)), null);
 	}
 
 }
