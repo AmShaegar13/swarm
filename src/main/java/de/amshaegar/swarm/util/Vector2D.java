@@ -1,8 +1,8 @@
 package de.amshaegar.swarm.util;
 
-public class Vector2D {
+import java.awt.geom.Point2D;
 
-	private double x, y;
+public class Vector2D extends Point2D.Double {
 
 	public Vector2D(final double x, final double y) {
 		this.x = x;
@@ -12,22 +12,6 @@ public class Vector2D {
 	@Override
 	public String toString() {
 		return String.format("Vector<%.3f:%.3f>", x, y);
-	}
-
-	public double getX() {
-		return x;
-	}
-
-	public void setX(final double x) {
-		this.x = x;
-	}
-
-	public double getY() {
-		return y;
-	}
-
-	public void setY(final double y) {
-		this.y = y;
 	}
 
 	public Vector2D add(final Vector2D v) {
