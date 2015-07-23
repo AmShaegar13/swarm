@@ -16,18 +16,7 @@ public class FleeFromNear extends AI {
 			moveTo = new MoveTo(fleeToPosition(dot));
 			moveTo.start();
 			moveTo.tick(dot, board);
-
-			switch (moveTo.getState()) {
-			case Success:
-				succeed();
-				break;
-			case Failure:
-				fail();
-				break;
-
-			default:
-				break;
-			}
+			succeed();
 		}
 	}
 

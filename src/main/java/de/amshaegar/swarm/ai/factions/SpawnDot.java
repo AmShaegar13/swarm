@@ -9,7 +9,7 @@ import de.amshaegar.swarm.ai.dots.FleeFromNear;
 
 public class SpawnDot extends AI {
 
-	int waitFrames;
+	private int waitFrames;
 
 	@Override
 	public void start() {
