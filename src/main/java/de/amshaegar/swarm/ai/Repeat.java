@@ -20,17 +20,9 @@ public class Repeat extends AI {
 	public void tick(final Object o, final Board board) {
 		if (isActive()) {
 			ai.tick(o, board);
-
-			switch (ai.getState()) {
-			case Success:
-				ai.start();
-				break;
-			case Failure:
-				fail();
-				break;
-
-			default:
-				break;
+			adoptState(ai);
+			if (ai.isSuccess()) {
+				start();
 			}
 		}
 	}

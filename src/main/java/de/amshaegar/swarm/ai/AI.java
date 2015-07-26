@@ -40,4 +40,18 @@ public abstract class AI {
 		return state;
 	}
 
+	protected void adoptState(final AI ai) {
+		switch (ai.getState()) {
+		case Success:
+			succeed();
+			break;
+		case Failure:
+			fail();
+			break;
+
+		default:
+			break;
+		}
+	}
+
 }
