@@ -16,12 +16,16 @@ public class Vector2D extends Point2D.Double {
 		return String.format("Vector<%.3f:%.3f>", x, y);
 	}
 
+	public Vector2D add(final double x, final double y) {
+		return new Vector2D(this.x + x, this.y + y);
+	}
+
 	public Vector2D add(final Vector2D v) {
-		return new Vector2D(x + v.getX(), y + v.getY());
+		return add(v.getX(), v.getY());
 	}
 
 	public Vector2D subtract(final Vector2D v) {
-		return new Vector2D(x - v.getX(), y - v.getY());
+		return add(-v.getX(), -v.getY());
 	}
 
 	public Vector2D multiply(final double m) {
