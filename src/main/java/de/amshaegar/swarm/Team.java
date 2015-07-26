@@ -11,6 +11,8 @@ import de.amshaegar.swarm.util.Vector2D;
 
 public class Team {
 
+	private final static Image CASTLE = Toolkit.getDefaultToolkit().getImage("castle.png");
+
 	private final String name;
 	private final Faction faction;
 	private final Vector2D home;
@@ -42,10 +44,8 @@ public class Team {
 	}
 
 	public void paint(final Graphics2D g2d) {
-		final Image castle = Toolkit.getDefaultToolkit().getImage("castle.png");
-
-		g2d.drawImage(castle, (int) Math.round(home.getX() - castle.getWidth(null) / 2),
-				(int) Math.round(home.getY() - castle.getHeight(null)), null);
+		g2d.drawImage(CASTLE, (int) Math.round(home.getX() - CASTLE.getWidth(null) / 2),
+				(int) Math.round(home.getY() - CASTLE.getHeight(null)), null);
 	}
 
 }
