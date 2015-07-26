@@ -1,10 +1,6 @@
 package de.amshaegar.swarm.ai;
 
-import de.amshaegar.swarm.Board;
-
-public class Repeat extends AI {
-
-	private final AI ai;
+public class Repeat extends AIProcessor {
 
 	public Repeat(final AI ai) {
 		this.ai = ai;
@@ -14,17 +10,6 @@ public class Repeat extends AI {
 	public void start() {
 		super.start();
 		ai.start();
-	}
-
-	@Override
-	public void tick(final Object o, final Board board) {
-		if (isActive()) {
-			ai.tick(o, board);
-			adoptState(ai);
-			if (ai.isSuccess()) {
-				start();
-			}
-		}
 	}
 
 }

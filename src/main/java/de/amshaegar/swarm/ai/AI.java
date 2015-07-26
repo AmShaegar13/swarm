@@ -25,33 +25,19 @@ public abstract class AI {
 	}
 
 	public boolean isSuccess() {
-		return state.equals(State.Success);
+		return State.Success.equals(state);
 	}
 
 	public boolean isFailure() {
-		return state.equals(State.Failure);
+		return State.Failure.equals(state);
 	}
 
 	public boolean isActive() {
-		return state.equals(State.Active);
+		return State.Active.equals(state);
 	}
 
 	public State getState() {
 		return state;
-	}
-
-	protected void adoptState(final AI ai) {
-		switch (ai.getState()) {
-		case Success:
-			succeed();
-			break;
-		case Failure:
-			fail();
-			break;
-
-		default:
-			break;
-		}
 	}
 
 }

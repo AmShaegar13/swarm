@@ -5,29 +5,27 @@ import java.util.Iterator;
 import de.amshaegar.swarm.Board;
 import de.amshaegar.swarm.Dot;
 import de.amshaegar.swarm.Team;
-import de.amshaegar.swarm.ai.AI;
+import de.amshaegar.swarm.ai.AIProcessor;
 import de.amshaegar.swarm.util.Vector2D;
 
-public class FindNearBorder extends AI {
-
-	private final MoveTo moveTo;
+public class FindNearBorder extends AIProcessor {
 
 	public FindNearBorder(final Team team, final Vector2D location) {
-		moveTo = new MoveTo(findNearBorder(team, location));
+		this.ai = new MoveTo(findNearBorder(team, location));
 	}
 
 	@Override
 	public void start() {
 		super.start();
-		moveTo.start();
+		ai.start();
 	}
 
 	@Override
 	public void tick(final Object o, final Board board) {
 		final Dot dot = (Dot) o;
 		if (isActive()) {
-			moveTo.tick(dot, board);
-			adoptState(moveTo);
+			ai.tick(dot, board);
+			adoptState(ai);
 		}
 	}
 
