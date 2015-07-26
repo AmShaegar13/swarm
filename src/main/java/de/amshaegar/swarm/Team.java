@@ -54,6 +54,10 @@ public class Team {
 		return home;
 	}
 
+	public List<Vector2D> getTerritory() {
+		return territory;
+	}
+
 	public void tick(final Board board) {
 		ai.tick(this, board);
 	}

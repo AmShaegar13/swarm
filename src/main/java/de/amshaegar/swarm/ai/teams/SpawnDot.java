@@ -5,7 +5,7 @@ import de.amshaegar.swarm.Dot;
 import de.amshaegar.swarm.Team;
 import de.amshaegar.swarm.ai.AI;
 import de.amshaegar.swarm.ai.Repeat;
-import de.amshaegar.swarm.ai.dots.FleeFromNear;
+import de.amshaegar.swarm.ai.dots.FindNearBorder;
 
 public class SpawnDot extends AI {
 
@@ -21,9 +21,9 @@ public class SpawnDot extends AI {
 	public void tick(final Object o, final Board board) {
 		if (isActive()) {
 			if (--waitFrames == 0) {
-				final AI ai = new Repeat(new FleeFromNear());
-				ai.start();
 				final Team team = (Team) o;
+				final AI ai = new Repeat(new FindNearBorder(team, team.getHome()));
+				ai.start();
 				board.getDots().add(new Dot(board, ai, team), team);
 				succeed();
 			}
