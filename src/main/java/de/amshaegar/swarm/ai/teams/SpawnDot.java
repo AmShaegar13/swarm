@@ -1,8 +1,8 @@
-package de.amshaegar.swarm.ai.factions;
+package de.amshaegar.swarm.ai.teams;
 
 import de.amshaegar.swarm.Board;
 import de.amshaegar.swarm.Dot;
-import de.amshaegar.swarm.Faction;
+import de.amshaegar.swarm.Team;
 import de.amshaegar.swarm.ai.AI;
 import de.amshaegar.swarm.ai.Repeat;
 import de.amshaegar.swarm.ai.dots.FleeFromNear;
@@ -23,8 +23,8 @@ public class SpawnDot extends AI {
 			if (--waitFrames == 0) {
 				final AI ai = new Repeat(new FleeFromNear());
 				ai.start();
-				final Faction faction = (Faction) o;
-				board.getDots().add(new Dot(board, ai, faction), faction);
+				final Team team = (Team) o;
+				board.getDots().add(new Dot(board, ai, team), team);
 				succeed();
 			}
 		}

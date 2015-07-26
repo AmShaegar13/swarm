@@ -3,6 +3,8 @@ package de.amshaegar.swarm;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -11,13 +13,17 @@ import de.amshaegar.swarm.util.Vector2D;
 public class Board extends JPanel {
 
 	private final DotsContainer dots;
+	private final List<Team> teams;
 
 	public Board() {
-		dots = new DotsContainer();
+		teams = new LinkedList<Team>();
 
 		for (final Faction faction : Faction.values()) {
-			faction.setLocation(new Vector2D(Math.random() * 1180 + 50, Math.random() * 620 + 50));
+			teams.add(new Team("Team " + faction.toString(), faction,
+					new Vector2D(Math.random() * 1180 + 50, Math.random() * 620 + 50)));
 		}
+
+		dots = new DotsContainer(teams);
 	}
 
 	public DotsContainer getDots() {
@@ -36,8 +42,8 @@ public class Board extends JPanel {
 
 		g2d.setRenderingHints(rh);
 
-		for (final Faction faction : Faction.values()) {
-			faction.paint(g2d);
+		for (final Team team : teams) {
+			team.paint(g2d);
 		}
 
 		for (final Dot dot : dots.getAll()) {
@@ -46,8 +52,8 @@ public class Board extends JPanel {
 	}
 
 	public void tick() {
-		for (final Faction faction : Faction.values()) {
-			faction.tick(this);
+		for (final Team team : teams) {
+			team.tick(this);
 		}
 		for (final Dot dot : dots.getAll()) {
 			dot.tick();

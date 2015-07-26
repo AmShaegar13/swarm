@@ -1,6 +1,6 @@
 package de.amshaegar.swarm;
 
-import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -8,12 +8,12 @@ import java.util.Map;
 public class DotsContainer {
 
 	private static List<Dot> dots = new LinkedList<Dot>();
-	private static Map<Faction, List<Dot>> dotsByFaction = new EnumMap<Faction, List<Dot>>(Faction.class);
+	private static Map<Team, List<Dot>> dotsByFaction = new HashMap<Team, List<Dot>>();
 
-	public DotsContainer() {
-		for (final Faction faction : Faction.values()) {
+	public DotsContainer(final List<Team> teams) {
+		for (final Team team : teams) {
 			final List<Dot> list = new LinkedList<Dot>();
-			dotsByFaction.put(faction, list);
+			dotsByFaction.put(team, list);
 		}
 	}
 
@@ -25,9 +25,9 @@ public class DotsContainer {
 		return new LinkedList<Dot>(dotsByFaction.get(faction));
 	}
 
-	public void add(final Dot dot, final Faction faction) {
+	public void add(final Dot dot, final Team team) {
 		dots.add(dot);
-		dotsByFaction.get(faction).add(dot);
+		dotsByFaction.get(team).add(dot);
 	}
 
 }

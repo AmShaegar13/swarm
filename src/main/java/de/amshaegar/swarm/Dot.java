@@ -13,13 +13,13 @@ public class Dot {
 	private Vector2D location;
 	private final Board board;
 	private final AI ai;
-	private final Faction faction;
+	private final Team team;
 
-	public Dot(final Board board, final AI ai, final Faction faction) {
+	public Dot(final Board board, final AI ai, final Team team) {
 		this.board = board;
 		this.ai = ai;
-		this.faction = faction;
-		this.location = faction.getLocation();
+		this.team = team;
+		this.location = team.getHome();
 	}
 
 	public double getR() {
@@ -34,8 +34,8 @@ public class Dot {
 		this.location = location;
 	}
 
-	public Faction getFaction() {
-		return faction;
+	public Team getTeam() {
+		return team;
 	}
 
 	public void tick() {
@@ -47,7 +47,7 @@ public class Dot {
 
 	public void paint(final Graphics2D g2d) {
 		final Ellipse2D e = new Ellipse2D.Double(location.getX() - r, location.getY() - r, 2 * r, 2 * r);
-		g2d.setColor(faction.getColor());
+		g2d.setColor(team.getFaction().getColor());
 		g2d.fill(e);
 		g2d.setColor(Color.black);
 		g2d.draw(e);
